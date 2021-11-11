@@ -1,6 +1,7 @@
 #!/bin/bash
 ufw enable
 echo 'allow-guest=false' >> /etc/lightdm/lightdm.conf
+apt-get update
 apt-get install libpam-cracklib
 sed -i 's/PASS_MAX_DAYS	99999/PASS_MAX_DAYS	90/' /etc/login.defs
 sed -i 's/PASS_MIN_DAYS	0/PASS_MIN_DAYS	10/' /etc/login.defs
