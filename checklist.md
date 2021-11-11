@@ -27,3 +27,7 @@ The script performs each of the following steps:
 ### 7. Set Login Policies 🔐
 * Open the authentication policy file with `gedit /etc/pam.d/common-auth`
 * Add `auth required pam_tally2.so deny=5 onerr=fail unlock_time=1800` to the end of the file
+## 8. Manage Services ⚙️
+* This allows you to enable needed services and disable unnecessary or malicious ones
+* Install Boot-Up Manager with `sudo apt-get install bum`
+* Run the app with `bum`
