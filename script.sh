@@ -93,7 +93,7 @@ systemctl disable cups.service cups ssh xinetd avahi-daemon isc-dhcp-server6 sla
 echo 'Services disabled. Make sure to re-enable any specified in the README.'
 
 echo 'Removing unneeded software and games...'
-apt-get remove openbsd-inetd xserver-xorg* nis talk telnet ldap-utils rsh-client rsh-redone-client wesnoth > /dev/null
+apt-get --assume-yes remove openbsd-inetd xserver-xorg* nis talk telnet ldap-utils rsh-client rsh-redone-client wesnoth > /dev/null
 apt-get purge -y nmap > /dev/null
 apt-get remove -y pure-ftpd
 rm -r /usr/games* > /dev/null
