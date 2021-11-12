@@ -32,59 +32,59 @@ echo 'auth required pam_tally2.so deny=5 onerr=fail unlock_time=1800' >> /etc/pa
 echo 'PAM settings updated.'
 
 echo 'Securing file permissions...'
-(chown root:root /etc/passwd)
-(chmod 644 /etc/passwd)
+chown root:root /etc/passwd
+chmod 644 /etc/passwd
 
-(chown root:shadow /etc/shadow)
-(chmod o-rwx,g-wx /etc/shadow)
+chown root:shadow /etc/shadow
+chmod o-rwx,g-wx /etc/shadow
 
-(chown root:root /etc/group)
-(chmod 644 /etc/group)
+chown root:root /etc/group
+chmod 644 /etc/group
 
-(chown root:root /etc/grub.conf)
-(chmod o-rwx,g-rw /etc/grub.conf)
+chown root:root /etc/grub.conf > /dev/null
+chmod o-rwx,g-rw /etc/grub.conf > /dev/null
 
-(chown -R root:root /etc/pam.d)
-(chmod -R o-rwx,g-rw /etc/pam.d)
+chown -R root:root /etc/pam.d
+chmod -R o-rwx,g-rw /etc/pam.d
 
-(chown root:shadow /etc/gshadow)
-(chmod o-rwx,g-rw /etc/gshadow)
+chown root:shadow /etc/gshadow
+chmod o-rwx,g-rw /etc/gshadow
 
-(chown root:root /etc/passwd-)
-(chmod u-x,go-wx /etc/passwd-)
+chown root:root /etc/passwd-
+chmod u-x,go-wx /etc/passwd-
 
-(chown root:shadow /etc/shadow-)
-(chmod o-rwx,g-rw /etc/shadow-)
+chown root:shadow /etc/shadow-
+chmod o-rwx,g-rw /etc/shadow-
 
-(chown root:root /etc/group-)
-(chmod u-x,go-wx /etc/group-)
+chown root:root /etc/group-
+chmod u-x,go-wx /etc/group-
 
-(chown root:shadow /etc/gshadow-)
-(chmod o-rwx,g-rw /etc/gshadow-)
+chown root:shadow /etc/gshadow-
+chmod o-rwx,g-rw /etc/gshadow-
 
-(chown root:shadow /etc/cron.d)
-(chmod o-rwx,g-rw /etc/cron.d)
+chown root:shadow /etc/cron.d
+chmod o-rwx,g-rw /etc/cron.d
 
-(chown root:shadow /etc/cron.daily)
-(chmod o-rwx,g-rw /etc/cron.daily)
+chown root:shadow /etc/cron.daily
+chmod o-rwx,g-rw /etc/cron.daily
 
-(chown root:shadow /etc/cron.hourly)
-(chmod o-rwx,g-rw /etc/cron.hourly)
+chown root:shadow /etc/cron.hourly
+chmod o-rwx,g-rw /etc/cron.hourly
 
-(chown root:shadow /etc/cron.monthly)
-(chmod o-rwx,g-rw /etc/cron.monthly)
+chown root:shadow /etc/cron.monthly
+chmod o-rwx,g-rw /etc/cron.monthly
 
-(chown root:shadow /etc/cron.weekly)
-(chmod o-rwx,g-rw /etc/cron.weekly)
+chown root:shadow /etc/cron.weekly
+chmod o-rwx,g-rw /etc/cron.weekly
 
-(chmod 600 /etc/securetty)
-(chmod 644 /etc/crontab)
-(chmod 640 /etc/ftpusers)
-(chmod 440 /etc/inetd.conf)
-(chmod 440 /etc/xinetd.conf)
-(chmod 400 /etc/inetd.d)
-(chmod 644 /etc/hosts.allow)
-(chmod 440 /etc/sudoers)
+chmod 600 /etc/securetty
+chmod 644 /etc/crontab
+chmod 640 /etc/ftpusers
+chmod 440 /etc/inetd.conf > /dev/null
+chmod 440 /etc/xinetd.conf > /dev/null
+chmod 400 /etc/inetd.d > /dev/null
+chmod 644 /etc/hosts.allow
+chmod 440 /etc/sudoers
 
 echo 'Permissions secured.'
 
