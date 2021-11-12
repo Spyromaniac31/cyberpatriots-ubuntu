@@ -96,6 +96,8 @@ echo 'Removing unneeded software and games...'
 apt-get --assume-yes remove openbsd-inetd xserver-xorg* nis talk telnet ldap-utils rsh-client rsh-redone-client wesnoth > /dev/null
 apt-get purge -y nmap > /dev/null
 apt-get remove -y pure-ftpd
+apt-get purge -y jack > /dev/null
+apt-get purge -y icecast2 > /dev/null
 rm -r /usr/games* > /dev/null
 rm -r /usr/local/games* /dev/null
 echo 'Software and games removed.'
