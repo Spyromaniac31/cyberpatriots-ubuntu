@@ -86,3 +86,38 @@ chmod 440 /etc/xinetd.conf
 chmod 400 /etc/inetd.d
 chmod 644 /etc/hosts.allow
 chmod 440 /etc/sudoers
+
+echo 'Permissions secured.'
+
+echo 'Disabling unneeded services...'
+systemctl disable cups.service cups ssh xinetd avahi-daemon isc-dhcp-server6 slapd nfs-server rcpbind bind9 vsftd dovecot smbd squid snmpd rsync rsh nis samba snmp talk ntalk ftp > /dev/null
+echo 'Services disabled. Make sure to re-enable any specified in the README.'
+
+echo 'Removing unneeded software and games...'
+apt-get remove openbsd-inetd xserver-xorg* nis talk telnet ldap-utils rsh-client rsh-redone-client wesnoth > /dev/null
+apt-get purge -y nmap > /dev/null
+apt-get remove -y pure-ftpd
+rm -r /usr/games* > /dev/null
+rm -r /usr/local/games* /dev/null
+echo 'Software and games removed.'
+
+echo 'Finding media files...'
+find . -type f -name "*.mp3"
+find . -type f -name "*.wav"
+find . -type f -name "*.mp4"
+find . -type f -name "*.ogg || .OGG"
+find . -type f -name "*.flac"
+find . -type f -name "*.aac"
+find . -type f -name "*.jpeg"
+find . -type f -name "*.gif"
+find . -type f -name "*.png"
+find . -type f -name "*.dts"
+find . -type f -name "*.bmp"
+find . -type f -name "*.aiff"
+find . -type f -name "*.dsd"
+find . -type f -name "*.lpcm"
+find . -type f -name "*.mkv"
+find . -type f -name "*.jpg"
+echo 'Media search done.'
+
+echo 'Script complete.'
