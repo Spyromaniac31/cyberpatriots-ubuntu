@@ -29,7 +29,7 @@ echo -e "[ i ] Adding specified users..."
 while read line; do 
   useradd -m $line &> /dev/null
 done < users.txt
-overwrite "{YES} All users added"
+overwrite "${YES} All users added"
 
 echo -e "[ i ] Removing unauthorized users..."
 IFS=':'
