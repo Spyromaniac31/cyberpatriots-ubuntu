@@ -79,10 +79,6 @@ echo -e "[ i ] Installing AuditD..."
 apt-get -y install auditd > /dev/null
 overwrite "${YES} Installed AuditD"
 
-echo -e "[ i ] Installing PHP..."
-apt-get -y install php > /dev/null
-overwrite "${YES} Installed PHP"
-
 echo -e "[ i ] Updating shadow password configuration file..."
 cp login.defs /etc/login.defs
 overwrite "${YES} Updated shadow password configuration file"
