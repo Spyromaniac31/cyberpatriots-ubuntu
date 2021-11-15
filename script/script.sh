@@ -101,3 +101,7 @@ overwrite "${YES} Removed GNOME games"
 
 echo -e "[ i ] Files in user directories:"
 find /home ~+ -type f -name "*"
+
+echo -e "[ i ] Enabling address space randomization"
+echo 2 > /proc/sys/kernel/randomize_va_space
+overwrite "${YES} Enabled address space randomization"
