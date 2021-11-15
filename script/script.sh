@@ -35,7 +35,7 @@ echo -e "[ i ] Removing unauthorized users..."
 IFS=':'
 while read -r user pass uid gid desc home shell; do
   if (($uid >= 1000)) && !(grep -q $user "users.txt"); then
-    userdel -r #user
+    userdel -r $user
   fi
 done < /etc/passwd
 overwrite "${YES} Unauthorized users removed"
