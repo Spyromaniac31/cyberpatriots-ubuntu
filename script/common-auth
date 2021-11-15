@@ -14,14 +14,15 @@
 # pam-auth-update(8) for details.
 
 # here are the per-package modules (the "Primary" block)
-auth	[success=1 default=ignore]	pam_unix.so nullok_secure
+auth	[success=1 default=ignore]	pam_unix.so
 # here's the fallback if no module succeeds
-auth	requisite			pam_deny.so
+auth	requisite			        pam_deny.so
 # prime the stack with a positive return value if there isn't one already;
 # this avoids us returning an error just because nothing sets a success code
 # since the modules above will each just jump around
-auth	required			pam_permit.so
+auth	required			        pam_permit.so
 # and here are more per-package modules (the "Additional" block)
-auth	optional			pam_cap.so 
+auth	optional			        pam_cap.so 
 # end of pam-auth-update config
-auth    required            pam_tally2.so deny=5 onerr=fail audit even_deny_root_account unlock_time=1800
+auth    required                    pam_tally2.so deny=5 onerr=fail audit even_deny_root_account unlock_time=1800
+# learn more at https://www.digitalocean.com/community/tutorials/how-to-use-pam-to-configure-authentication-on-an-ubuntu-12-04-vps

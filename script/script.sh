@@ -82,3 +82,22 @@ overwrite "${YES} Installed AuditD"
 echo -e "[ i ] Installing PHP..."
 apt-get -y install php > /dev/null
 overwrite "${YES} Installed PHP"
+
+echo -e "[ i ] Updating shadow password configuration file..."
+cp login.defs /etc/login.defs
+overwrite "${YES} Updated shadow password configuration file"
+
+echo -e "[ i ] Updating PAM authentication file..."
+cp common-auth /etc/pam.d/common-auth
+overwrite "${YES} Updated PAM authentication file"
+
+echo -e "[ i ] Updating PAM password file..."
+cp common-password /etc/pam.d/common-password
+overwrite "${YES} Updated PAM password file"
+
+echo -e "[ i ] Removing GNOME games..."
+apt-get -y purge gnome-games > /dev/null
+overwrite "${YES} Removed GNOME games"
+
+echo -e "[ i ] Files in user directories:"
+find /home ~+ -type f -name "*"
