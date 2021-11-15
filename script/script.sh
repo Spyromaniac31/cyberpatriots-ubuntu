@@ -95,7 +95,6 @@ echo -e "[ i ] Removing GNOME games..."
 apt-get -y purge gnome-games > /dev/null
 overwrite "${YES} Removed GNOME games"
 
-<<<<<<< HEAD
 echo -e "[ i ] Listing files in user directories..."
 find /home ~+ -type f -name "*" > userfiles.txt
 overwrite "${YES} Listed files in user directories in userfiles.txt"
