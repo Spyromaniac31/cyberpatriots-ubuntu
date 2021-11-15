@@ -99,5 +99,36 @@ echo -e "[ i ] Removing GNOME games..."
 apt-get -y purge gnome-games > /dev/null
 overwrite "${YES} Removed GNOME games"
 
-echo -e "[ i ] Files in user directories:"
-find /home ~+ -type f -name "*"
+echo -e "[ i ] Listing files in user directories..."
+find /home ~+ -type f -name "*" > userfiles.txt
+overwrite "${YES} Listed files in user directories in userfiles.txt"
+
+echo -e "[ i ] Removing games from /usr..."
+rm -rf /usr/games > /dev/null
+rm -rf /usr/local/games > /dev/null
+overwrite "${YES} Removed games from /usr"
+
+echo -e "[ i ] Setting shadow file permissions..."
+chown root:shadow /etc/shadow
+chmod 640 /etc/shadow
+overwrite "${YES} Set shadow file permissions"
+
+echo -e "[ i ] Setting account file permissions..."
+chown root:root /etc/passwd
+chmod 644 /etc/passwd
+overwrite "${YES} Set account file permissions"
+
+echo -e "[ i ] Setting group file permissions..."
+chown root:root /etc/group
+chmod 644 /etc/group
+overwrite "${YES} Set group file permissions"
+
+echo -e "[ i ] Setting PAM file permissions..."
+chown root:root /etc/pam.d
+chmod 644 /etc/pam.d
+overwrite "${YES} Set PAM file permissions"
+
+echo -e "[ i ] Setting group password file permissions"
+chown root:shadow /etc/gshadow
+chmod 640 /etc/gshadow
+overwrite "${YES} Set group password file permissions"
