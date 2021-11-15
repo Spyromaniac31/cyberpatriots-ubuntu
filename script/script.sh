@@ -29,13 +29,13 @@ echo -e "[ i ] Adding specified users..."
 while read line; do 
   useradd -m $line &> /dev/null
 done < users.txt
-overwrite "{YES} All users added"
+overwrite "${YES} All users added"
 
 echo -e "[ i ] Removing unauthorized users..."
 IFS=':'
 while read -r user pass uid gid desc home shell; do
   if (($uid >= 1000)) && !(grep -q $user "users.txt"); then
-    userdel -r #user
+    userdel -r $user
   fi
 done < /etc/passwd
 overwrite "${YES} Unauthorized users removed"
@@ -79,10 +79,6 @@ echo -e "[ i ] Installing AuditD..."
 apt-get -y install auditd > /dev/null
 overwrite "${YES} Installed AuditD"
 
-echo -e "[ i ] Installing PHP..."
-apt-get -y install php > /dev/null
-overwrite "${YES} Installed PHP"
-
 echo -e "[ i ] Updating shadow password configuration file..."
 cp login.defs /etc/login.defs
 overwrite "${YES} Updated shadow password configuration file"
@@ -99,6 +95,7 @@ echo -e "[ i ] Removing GNOME games..."
 apt-get -y purge gnome-games > /dev/null
 overwrite "${YES} Removed GNOME games"
 
+<<<<<<< HEAD
 echo -e "[ i ] Listing files in user directories..."
 find /home ~+ -type f -name "*" > userfiles.txt
 overwrite "${YES} Listed files in user directories in userfiles.txt"
@@ -132,3 +129,7 @@ echo -e "[ i ] Setting group password file permissions"
 chown root:shadow /etc/gshadow
 chmod 640 /etc/gshadow
 overwrite "${YES} Set group password file permissions"
+
+echo -e "[ i ] Enabling address space randomization"
+echo 2 > /proc/sys/kernel/randomize_va_space
+overwrite "${YES} Enabled address space randomization"
