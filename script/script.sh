@@ -124,11 +124,19 @@ chown root:root /etc/pam.d
 chmod 644 /etc/pam.d
 overwrite "${YES} Set PAM file permissions"
 
-echo -e "[ i ] Setting group password file permissions"
+echo -e "[ i ] Setting group password file permissions..."
 chown root:shadow /etc/gshadow
 chmod 640 /etc/gshadow
 overwrite "${YES} Set group password file permissions"
 
-echo -e "[ i ] Enabling address space randomization"
+echo -e "[ i ] Enabling address space randomization..."
 echo 2 > /proc/sys/kernel/randomize_va_space
 overwrite "${YES} Enabled address space randomization"
+
+echo -e "[ i ] Disabling core dumps..."
+echo "* hard core 0" >> /etc/security/limits.conf
+echo "* soft core 0" >> /etc/security/limits.conf
+echo "fs.suid_dumpable=0" >> /etc/sysctl.conf
+echo "kernel.core_pattern=|/bin/false" >> /etc/sysctl.conf
+sysctl -p /etc/sysctl.d/9999-disable-core-dump.conf
+overwrite "${YES} Disabled core dumps"
