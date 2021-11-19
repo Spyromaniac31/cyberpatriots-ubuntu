@@ -1,0 +1,4 @@
+# These services will be disabled by the script. Comment out any you need to keep
+telnet
+vsftpd
+pure-ftpd
