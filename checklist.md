@@ -11,4 +11,7 @@
 ## 6. Check Ports 🚤
 * List processes listening on ports with `sudo netstat -tulpn`
 ## 7. Check for Rootkits 🔒
-* Run Rookit Hunter with `rkhunter -c`
+* Run Rookit Hunter with `sudo rkhunter -c`
+## 8. Run Lynis 📝
+* Lynis gives an incredibly comprehensive system audit report
+* Run `sudo lynis audit system`
