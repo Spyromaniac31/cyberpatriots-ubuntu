@@ -2,3 +2,6 @@
 telnet
 vsftpd
 pure-ftpd
+cups
+rsyslog
+openvpn

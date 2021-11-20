@@ -104,6 +104,19 @@ rm -rf /usr/games > /dev/null
 rm -rf /usr/local/games > /dev/null
 overwrite "${YES} Removed games from /usr/"
 
+echo -e "[ i ] Removing unneeded software..."
+apt-get -y purge nmap > /dev/null
+killall -9 netcat > /dev/null
+apt-get -y purge netcat > /dev/null
+apt-get -y purge telnetd > /dev/null
+apt-get -y purge telnet > /dev/null
+apt-get -y purge pure-ftpd > /dev/null
+apt-get -y purge wireshark > /dev/null
+apt-get -y purge xinetd > /dev/null
+apt-get -y purge openssh-server > /dev/null
+apt-get -y purge rsync > /dev/null
+overwrite "${YES} Removed unneeded software"
+
 echo -e "[ i ] Setting shadow file permissions..."
 chown root:shadow /etc/shadow
 chmod 640 /etc/shadow

@@ -8,3 +8,7 @@
 * Update users' passwords to meet the new requirements
 ## 5. Manage Services ⚙️
 * List enabled services with `service --status-all`
+## 6. Check Ports 🚤
+* List processes listening on ports with `sudo netstat -tulpn`
+## 7. Check for Rootkits 🔒
+* Run Rookit Hunter with `rkhunter -c`
