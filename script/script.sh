@@ -99,10 +99,10 @@ echo -e "[ i ] Listing files in user directories..."
 find /home ~+ -type f -name "*" > userfiles.txt
 overwrite "${YES} Listed files in user directories in userfiles.txt"
 
-echo -e "[ i ] Removing games from /usr..."
+echo -e "[ i ] Removing games from /usr/..."
 rm -rf /usr/games > /dev/null
 rm -rf /usr/local/games > /dev/null
-overwrite "${YES} Removed games from /usr"
+overwrite "${YES} Removed games from /usr/"
 
 echo -e "[ i ] Setting shadow file permissions..."
 chown root:shadow /etc/shadow
@@ -140,3 +140,8 @@ echo "fs.suid_dumpable=0" >> /etc/sysctl.conf
 echo "kernel.core_pattern=|/bin/false" >> /etc/sysctl.conf
 sysctl -p /etc/sysctl.d/9999-disable-core-dump.conf
 overwrite "${YES} Disabled core dumps"
+
+echo -e "[ i ] Updating sysctl.conf..."
+cp sysctl.conf /etc/sysctl.conf
+sysctl -p
+overwrite "${YES} Updated sysctl.conf"
