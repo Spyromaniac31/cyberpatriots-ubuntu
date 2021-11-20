@@ -3,7 +3,7 @@
 YES="[\033[0;32m ✓ \033[0m]"
 NO="[\033[0;31m ✗ \033[0m]"
 
-overwrite() { echo -e "\r\033[1A\033{OK$@"; }
+overwrite() { echo -e "\r\033[1A\033[0K$@"; }
 
 if [ $EUID -ne 0 ]; then
   echo -e "${NO} Script called with non-root privileges"
@@ -43,7 +43,7 @@ overwrite "${YES} Unauthorized users removed"
 echo -e "[ i ] Configuring admin privileges"
 while read -r user pass uid gid desc home shell; do
   if (($uid >= 1000)); then
-    if grep -q $user "admin.txt"; then
+    if grep -q $user "admins.txt"; then
       usermod -aG sudo $user
     else
       gpasswd -d $user sudo
@@ -68,6 +68,10 @@ apt-get -y install libpam-cracklib > /dev/null
 overwrite "${YES} Installed Cracklib"
 
 echo -e "[ i ] Installing Lynis..."
+wget -q -O - https://packages.cisofy.com/keys/cisofy-software-public.key | sudo apt-key add - &> /dev/null
+echo "deb https://packages.cisofy.com/community/lynis/deb/ stable main" | sudo tee /etc/apt/sources.list.d/cisofy-lynis.list > /dev/null
+apt-get -y install apt-transport-https > /dev/null
+apt-get update > /dev/null
 apt-get -y install lynis > /dev/null
 overwrite "${YES} Installed Lynis"
 
@@ -106,7 +110,7 @@ overwrite "${YES} Removed games from /usr/"
 
 echo -e "[ i ] Removing unneeded software..."
 apt-get -y purge nmap > /dev/null
-killall -9 netcat > /dev/null
+killall -9 netcat &> /dev/null
 apt-get -y purge netcat > /dev/null
 apt-get -y purge telnetd > /dev/null
 apt-get -y purge telnet > /dev/null
@@ -151,10 +155,10 @@ echo "* hard core 0" >> /etc/security/limits.conf
 echo "* soft core 0" >> /etc/security/limits.conf
 echo "fs.suid_dumpable=0" >> /etc/sysctl.conf
 echo "kernel.core_pattern=|/bin/false" >> /etc/sysctl.conf
-sysctl -p /etc/sysctl.d/9999-disable-core-dump.conf
+sysctl -p > /dev/null
 overwrite "${YES} Disabled core dumps"
 
 echo -e "[ i ] Updating sysctl.conf..."
 cp sysctl.conf /etc/sysctl.conf
-sysctl -p
+sysctl -p > /dev/null
 overwrite "${YES} Updated sysctl.conf"
