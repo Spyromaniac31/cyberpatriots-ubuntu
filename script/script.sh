@@ -83,6 +83,39 @@ echo -e "[ i ] Installing AuditD..."
 apt-get -y install auditd > /dev/null
 overwrite "${YES} Installed AuditD"
 
+echo -e "[ i ] Installing SysStat..."
+apt-get -y install sysstat > /dev/null
+overwrite "${YES} Installed SysStat"
+
+echo -e "[ i ] Installing DebSums..."
+apt-get -y install debsums > /dev/null
+overwrite "${YES} Installed DebSums"
+
+echo -e "[ i ] Installing apt-show-versions..."
+apt-get -y install apt-show-versions > /dev/null
+overwrite "${YES} Installed apt-show-versions"
+
+echo -e "[ i ] Adding legal banners..."
+echo "WATCH OUT VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" > /etc/issue.net
+echo "WATCH OUT VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" > /etc/issue
+overwrite "${YES} Added legal banners"
+
+echo -e "[ i ] Disabling DCCP protocol..."
+echo "install dccp /bin/true" > /etc/modprobe.d/dccp.conf
+overwrite "${YES} Disabled DCCP protocol"
+
+echo -e "[ i ] Disabling SCTP protocol..."
+echo "install sctp /bin/true" > /etc/modprobe.d/sctp.conf
+overwrite "${YES} Disabled SCTP protocol"
+
+echo -e "[ i ] Disabling RDS protocol..."
+echo "install rds /bin/true" > /etc/modprobe.d/rds.conf
+overwrite "${YES} Disabled RDS protocol"
+
+echo -e "[ i ] Disabling TIPC protocol..."
+echo "install tipc /bin/true" > /etc/modprobe.d/tipc.conf
+overwrite "${YES} Disabled TIPC protocol"
+
 echo -e "[ i ] Updating shadow password configuration file..."
 cp login.defs /etc/login.defs
 overwrite "${YES} Updated shadow password configuration file"
