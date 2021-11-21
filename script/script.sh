@@ -35,7 +35,7 @@ echo -e "[ i ] Removing unauthorized users..."
 IFS=':'
 while read -r user pass uid gid desc home shell; do
   if (($uid >= 1000)) && !(grep -q $user "users.txt"); then
-    userdel -r $user
+    userdel -r $user > /dev/null
   fi
 done < /etc/passwd
 overwrite "${YES} Unauthorized users removed"
@@ -98,7 +98,7 @@ overwrite "${YES} Installed apt-show-versions"
 echo -e "[ i ] Adding legal banners..."
 echo "WATCH OUT, VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" >> /etc/issue.net
 echo "WATCH OUT, VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" >> /etc/issue
-overwrite "${YES} Added legal banners">
+overwrite "${YES} Added legal banners"
 
 echo -e "[ i ] Disabling DCCP protocol..."
 echo "install dccp /bin/true" > /etc/modprobe.d/dccp.conf
