@@ -96,9 +96,9 @@ apt-get -y install apt-show-versions > /dev/null
 overwrite "${YES} Installed apt-show-versions"
 
 echo -e "[ i ] Adding legal banners..."
-echo "WATCH OUT VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" > /etc/issue.net
-echo "WATCH OUT VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" > /etc/issue
-overwrite "${YES} Added legal banners"
+echo "WATCH OUT, VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" >> /etc/issue.net
+echo "WATCH OUT, VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" >> /etc/issue
+overwrite "${YES} Added legal banners">
 
 echo -e "[ i ] Disabling DCCP protocol..."
 echo "install dccp /bin/true" > /etc/modprobe.d/dccp.conf
@@ -141,18 +141,18 @@ rm -rf /usr/games > /dev/null
 rm -rf /usr/local/games > /dev/null
 overwrite "${YES} Removed games from /usr/"
 
-echo -e "[ i ] Removing unneeded software..."
-apt-get -y purge nmap > /dev/null
-killall -9 netcat &> /dev/null
-apt-get -y purge netcat > /dev/null
-apt-get -y purge telnetd > /dev/null
-apt-get -y purge telnet > /dev/null
-apt-get -y purge pure-ftpd > /dev/null
-apt-get -y purge wireshark > /dev/null
-apt-get -y purge xinetd > /dev/null
-apt-get -y purge openssh-server > /dev/null
-apt-get -y purge rsync > /dev/null
-overwrite "${YES} Removed unneeded software"
+# echo -e "[ i ] Removing unneeded software..."
+# apt-get -y purge nmap > /dev/null
+# killall -9 netcat &> /dev/null
+# apt-get -y purge netcat > /dev/null
+# apt-get -y purge telnetd > /dev/null
+# apt-get -y purge telnet > /dev/null
+# apt-get -y purge pure-ftpd > /dev/null
+# apt-get -y purge wireshark > /dev/null
+# apt-get -y purge xinetd > /dev/null
+# apt-get -y purge openssh-server > /dev/null
+# apt-get -y purge rsync > /dev/null
+# overwrite "${YES} Removed unneeded software"
 
 echo -e "[ i ] Setting shadow file permissions..."
 chown root:shadow /etc/shadow
@@ -184,11 +184,7 @@ echo 2 > /proc/sys/kernel/randomize_va_space
 overwrite "${YES} Enabled address space randomization"
 
 echo -e "[ i ] Disabling core dumps..."
-echo "* hard core 0" >> /etc/security/limits.conf
-echo "* soft core 0" >> /etc/security/limits.conf
-echo "fs.suid_dumpable=0" >> /etc/sysctl.conf
-echo "kernel.core_pattern=|/bin/false" >> /etc/sysctl.conf
-sysctl -p > /dev/null
+cp limits.conf /etc/security/limits.conf
 overwrite "${YES} Disabled core dumps"
 
 echo -e "[ i ] Updating sysctl.conf..."
