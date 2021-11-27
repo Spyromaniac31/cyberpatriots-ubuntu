@@ -35,7 +35,7 @@ echo -e "[ i ] Removing unauthorized users..."
 IFS=':'
 while read -r user pass uid gid desc home shell; do
   if (($uid >= 1000)) && !(grep -q $user "users.txt"); then
-    userdel -r $user > /dev/null
+    userdel -r $user &> /dev/null
   fi
 done < /etc/passwd
 overwrite "${YES} Unauthorized users removed"
@@ -76,6 +76,7 @@ apt-get -y install lynis > /dev/null
 overwrite "${YES} Installed Lynis"
 
 echo -e "[ i ] Installing Rootkit Hunter..."
+DEBIAN_FRONTEND=noninteractive apt-get install -y postfix > /dev/null
 apt-get -y install rkhunter > /dev/null
 overwrite "${YES} Installed Rootkit Hunter"
 
@@ -87,6 +88,12 @@ echo -e "[ i ] Installing SysStat..."
 apt-get -y install sysstat > /dev/null
 overwrite "${YES} Installed SysStat"
 
+echo -e "[ i ] Enabling SysStat..."
+echo "ENABLED=true" > /etc/default/sysstat
+systemctl enable sysstat &> /dev/null
+systemctl start sysstat > /dev/null
+overwrite "${YES} Enabled SysStat"
+
 echo -e "[ i ] Installing DebSums..."
 apt-get -y install debsums > /dev/null
 overwrite "${YES} Installed DebSums"
@@ -96,8 +103,8 @@ apt-get -y install apt-show-versions > /dev/null
 overwrite "${YES} Installed apt-show-versions"
 
 echo -e "[ i ] Adding legal banners..."
-echo "WATCH OUT, VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" >> /etc/issue.net
-echo "WATCH OUT, VILLAINS. THIS IS PROTECTED BY CYBERPATRIOTS *SNARLS*" >> /etc/issue
+echo "WARNING: UNAUTHORIZED ACCESS IS FORBIDDEN. PENAL LAWS WILL BE ENFORCED BY OWNER." > /etc/issue.net
+echo "WARNING: UNAUTHORIZED ACCESS IS FORBIDDEN. PENAL LAWS WILL BE ENFORCED BY OWNER." > /etc/issue
 overwrite "${YES} Added legal banners"
 
 echo -e "[ i ] Disabling DCCP protocol..."
@@ -141,7 +148,8 @@ rm -rf /usr/games > /dev/null
 rm -rf /usr/local/games > /dev/null
 overwrite "${YES} Removed games from /usr/"
 
-# echo -e "[ i ] Removing unneeded software..."
+echo -e "[ i ] Removing unneeded software..."
+# We'll figure this out later
 # apt-get -y purge nmap > /dev/null
 # killall -9 netcat &> /dev/null
 # apt-get -y purge netcat > /dev/null
@@ -152,7 +160,10 @@ overwrite "${YES} Removed games from /usr/"
 # apt-get -y purge xinetd > /dev/null
 # apt-get -y purge openssh-server > /dev/null
 # apt-get -y purge rsync > /dev/null
-# overwrite "${YES} Removed unneeded software"
+overwrite "${YES} Removed unneeded software"
+
+echo -e "[ i ] Restricting compiler access..."
+overwrite "${YES} Restricted compiler access"
 
 echo -e "[ i ] Setting shadow file permissions..."
 chown root:shadow /etc/shadow
@@ -179,15 +190,11 @@ chown root:shadow /etc/gshadow
 chmod 640 /etc/gshadow
 overwrite "${YES} Set group password file permissions"
 
-echo -e "[ i ] Enabling address space randomization..."
-echo 2 > /proc/sys/kernel/randomize_va_space
-overwrite "${YES} Enabled address space randomization"
-
 echo -e "[ i ] Disabling core dumps..."
 cp limits.conf /etc/security/limits.conf
 overwrite "${YES} Disabled core dumps"
 
 echo -e "[ i ] Updating sysctl.conf..."
-cp sysctl.conf /etc/sysctl.conf
+cp sysctl.conf /etc/sysctl.conf > /dev/null
 sysctl -p > /dev/null
 overwrite "${YES} Updated sysctl.conf"
