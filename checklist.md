@@ -4,14 +4,17 @@
 ## 2. Configure Update Settings 📦
 * Open System Settings and make sure the system checks for and installs updates as much as possible, and make sure the correct software sources are enabled.
 ## 3. Run Script 📜
-## 4. Update Passwords 🔑
-* Update users' passwords to meet the new requirements
-## 5. Manage Services ⚙️
+## 4. Manage Services ⚙️
 * List enabled services with `service --status-all`
-## 6. Check Ports 🚤
+## 5. Check Ports 🚤
 * List processes listening on ports with `sudo netstat -tulpn`
-## 7. Check for Rootkits 🔒
+## 6. Check for Rootkits 🔒
 * Run Rookit Hunter with `sudo rkhunter -c`
-## 8. Run Lynis 📝
+## 7. Run Lynis 📝
 * Lynis gives an incredibly comprehensive system audit report
 * Run `sudo lynis audit system`
+## 8. Check Password Files 🔑
+* The script sets up the users as dictated by the files, but there may be hidden users or undesirable groups.
+* `sudo gedit /etc/passwd`
+* `sudo gedit /etc/shadow`
+* `sudo gedit /etc/sudoers.d`

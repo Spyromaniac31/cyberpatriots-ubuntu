@@ -40,6 +40,12 @@ while read -r user pass uid gid desc home shell; do
 done < /etc/passwd
 overwrite "${YES} Unauthorized users removed"
 
+echo -e "[ i ] Updating user passwords..."
+while read line; do
+  chpasswd $line:Cyb3rP@triot &> /dev/null
+done < users.txt
+overwrite "${YES} User passwords updated"
+
 echo -e "[ i ] Configuring admin privileges"
 while read -r user pass uid gid desc home shell; do
   if (($uid >= 1000)); then
@@ -52,7 +58,16 @@ while read -r user pass uid gid desc home shell; do
 done < /etc/passwd
 overwrite "${YES} Admin priviliges configured"
 
+echo -e "[ i ] Restricting home directory access..."
+while read -r user pass uid gid desc home shell; do
+  if (($uid >= 1000)); then
+    chmod 750 $home
+  fi
+done < /etc/passwd
+overwrite "${YES} Home directory access restricted"
+
 ufw enable > /dev/null
+ufw logging full > /dev/null
 echo -e "${YES} Enabled Uncomplicated Firewall (UFW)"
 
 echo -e "[ i ] Updating cache of available packages..."
@@ -77,12 +92,18 @@ overwrite "${YES} Installed Lynis"
 
 echo -e "[ i ] Installing Rootkit Hunter..."
 DEBIAN_FRONTEND=noninteractive apt-get install -y postfix > /dev/null
+systemctl stop postfix
+rm -f /etc/postfix/main.cf > /dev/null
 apt-get -y install rkhunter > /dev/null
 overwrite "${YES} Installed Rootkit Hunter"
 
 echo -e "[ i ] Installing AuditD..."
 apt-get -y install auditd > /dev/null
 overwrite "${YES} Installed AuditD"
+
+echo -e "[ i ] Adding AuditD rules..."
+cp audit.rules /etc/audit/audit.rules > /dev/null
+overwrite "${YES} Added AuditD rules"
 
 echo -e "[ i ] Installing SysStat..."
 apt-get -y install sysstat > /dev/null
@@ -93,6 +114,14 @@ echo "ENABLED=true" > /etc/default/sysstat
 systemctl enable sysstat &> /dev/null
 systemctl start sysstat > /dev/null
 overwrite "${YES} Enabled SysStat"
+
+echo -e "[ i ] Installing acct..."
+apt-get -y install acct > /dev/null
+overwrite "${YES} Installed acct"
+
+echo -e "[ i ] Enabling acct..."
+/etc/init.d/acct start > /dev/null
+overwrite "${YES} Enabled acct"
 
 echo -e "[ i ] Installing DebSums..."
 apt-get -y install debsums > /dev/null
@@ -149,20 +178,20 @@ rm -rf /usr/local/games > /dev/null
 overwrite "${YES} Removed games from /usr/"
 
 echo -e "[ i ] Removing unneeded software..."
-# We'll figure this out later
-# apt-get -y purge nmap > /dev/null
-# killall -9 netcat &> /dev/null
-# apt-get -y purge netcat > /dev/null
-# apt-get -y purge telnetd > /dev/null
-# apt-get -y purge telnet > /dev/null
-# apt-get -y purge pure-ftpd > /dev/null
-# apt-get -y purge wireshark > /dev/null
-# apt-get -y purge xinetd > /dev/null
-# apt-get -y purge openssh-server > /dev/null
-# apt-get -y purge rsync > /dev/null
+while read line; do
+  apt-get -y purge $line > /dev/null
+done < software.txt
 overwrite "${YES} Removed unneeded software"
 
+echo -e "[ i ] Disabling unneeded services..."
+while read line; do 
+  systemctl stop $line &> /dev/null
+  systemctl disable $line &> /dev/null
+done < services.txt
+overwrite "${YES} Disabled unneeded services"
+
 echo -e "[ i ] Restricting compiler access..."
+chmod o-rx /usr/bin/x86_64-linux-gnu-as > /dev/null
 overwrite "${YES} Restricted compiler access"
 
 echo -e "[ i ] Setting shadow file permissions..."
@@ -190,6 +219,19 @@ chown root:shadow /etc/gshadow
 chmod 640 /etc/gshadow
 overwrite "${YES} Set group password file permissions"
 
+echo -e "[ i ] Setting Cron file permissions..."
+chmod 600 /etc/crontab
+chmod 700 /etc/cron.d
+chmod 700 /etc/cron.daily
+chmod 700 /etc/cron.hourly
+chmod 700 /etc/cron.monthly
+chmod 700 /etc/cron.weekly
+overwrite "${YES} Set Cron file permissions"
+
+echo -e "[ i ] Setting CUPS file permissions..."
+chmod 600 /etc/cups/cupsd.conf
+overwrite "${YES} Set CUPS file permissions"
+
 echo -e "[ i ] Disabling core dumps..."
 cp limits.conf /etc/security/limits.conf
 overwrite "${YES} Disabled core dumps"
@@ -198,3 +240,7 @@ echo -e "[ i ] Updating sysctl.conf..."
 cp sysctl.conf /etc/sysctl.conf > /dev/null
 sysctl -p > /dev/null
 overwrite "${YES} Updated sysctl.conf"
+
+echo -e "[ i ] Purging old packages..."
+apt-get -y autoremove > /dev/null
+overwrite "${YES} Purged old packages"

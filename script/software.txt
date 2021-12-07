@@ -1,0 +1,10 @@
+nmap
+zenmap
+netcat
+telnetd
+telnet
+pure-ftpd
+wireshark
+xinetd
+openssh-server
+rsync

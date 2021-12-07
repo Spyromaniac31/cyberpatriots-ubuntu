@@ -1,7 +1,7 @@
 # These services will be disabled by the script. Comment out any you need to keep
-telnet
-vsftpd
-pure-ftpd
-cups
-rsyslog
-openvpn
+telnet.service
+vsftpd.service
+pure-ftpd.service
+cups.service
+rsyslog.service
+openvpn.service
