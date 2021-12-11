@@ -8,3 +8,5 @@ wireshark
 xinetd
 openssh-server
 rsync
+nginx
+squid

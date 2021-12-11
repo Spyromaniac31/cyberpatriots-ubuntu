@@ -18,3 +18,14 @@
 * `sudo gedit /etc/passwd`
 * `sudo gedit /etc/shadow`
 * `sudo gedit /etc/sudoers.d`
+## 9. Check Log Files 📄
+* Log files can allow you to find potential security issues caused by malicious activity.
+* /var/log/messages
+* /var/log/boot
+* /var/log/debug
+* /var/log/auth.log
+* /var/log/daemon.log
+* /var/log/kern.log
+* /var/log/dpkg.log
+## 10. Remove user files 
+* Look in userfiles.txt for the files you want to remove.

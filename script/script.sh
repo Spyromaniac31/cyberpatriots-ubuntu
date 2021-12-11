@@ -50,9 +50,9 @@ echo -e "[ i ] Configuring admin privileges"
 while read -r user pass uid gid desc home shell; do
   if (($uid >= 1000)); then
     if grep -q $user "admins.txt"; then
-      usermod -aG sudo $user
+      usermod -aG sudo $user > /dev/null
     else
-      gpasswd -d $user sudo
+      gpasswd -d $user sudo &> /dev/null
     fi
   fi
 done < /etc/passwd
@@ -179,7 +179,7 @@ overwrite "${YES} Removed games from /usr/"
 
 echo -e "[ i ] Removing unneeded software..."
 while read line; do
-  apt-get -y purge $line > /dev/null
+  apt-get -y purge $line &> /dev/null
 done < software.txt
 overwrite "${YES} Removed unneeded software"
 
