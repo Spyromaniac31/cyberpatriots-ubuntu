@@ -6,6 +6,9 @@
 ## 3. Run Script 📜
 ## 4. Manage Services ⚙️
 * List enabled services with `service --status-all`
+* Common unwanted services are disabled by the script, but there may be other rogue services to remove
+* If SSH is required, use `sudo nano /etc/ssh/sshd_config` to examine and configure SSH access
+* `nano` is a built-in command-line text editor. Learn more [here](https://help.ubuntu.com/community/Nano)
 ## 5. Check Ports 🚤
 * List processes listening on ports with `sudo netstat -tulpn`
 ## 6. Check for Rootkits 🔒
@@ -29,3 +32,8 @@
 * /var/log/dpkg.log
 ## 10. Remove user files 
 * Look in userfiles.txt for the files you want to remove.
+## 11. Check Running Processes 💿
+* `ps aef` lists all processes. You might want to scan these to see if anything weird is listed
+* `ps aux | grep netcat` returns all running processes with `netcat` in the name. Netcat is a networking utility that we don't want on the machine.
+* Note: If Netcat isn't running, the above command will still return one entry for `grep --color=auto netcat` (the process you invoke by running the command)
+* Learn more about `ps` [here](https://www.computernetworkingnotes.com/linux-tutorials/ps-aux-command-and-ps-command-explained.html)
