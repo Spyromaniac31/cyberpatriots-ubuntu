@@ -1,7 +1,9 @@
 # These services will be disabled by the script. Comment out any you need to keep
+cups.service
+openvpn.service
+pure-ftpd.service
+rexec.service
+rsync.service
+rsyslog.service
 telnet.service
 vsftpd.service
-pure-ftpd.service
-cups.service
-rsyslog.service
-openvpn.service
