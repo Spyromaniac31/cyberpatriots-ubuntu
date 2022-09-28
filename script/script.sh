@@ -67,15 +67,6 @@ while read -r user pass uid gid desc home shell; do
 done < /etc/passwd
 overwrite "${YES} Home directory access restricted"
 
-ufw enable > /dev/null
-ufw logging full > /dev/null
-echo -e "${YES} Enabled Uncomplicated Firewall (UFW)"
-
-echo -e "[ i ] Configuring UFW rules..."
-cp before.rules /etc/ufw/before.rules > /dev/null
-ufw reload > /dev/null
-overwrite "${YES} UFW rules configured"
-
 echo -e "[ i ] Updating cache of available packages..."
 apt-get update > /dev/null
 overwrite "${YES} Updated cache of available packages"
@@ -87,6 +78,15 @@ overwrite "${YES} Updated installed packages"
 echo -e "[ i ] Updating APT periodic configuration..."
 cp 10periodic /etc/apt/apt.conf.d/10periodic > /dev/null
 overwrite "${YES} Updated APT periodic configuration"
+
+ufw enable > /dev/null
+ufw logging full > /dev/null
+echo -e "${YES} Enabled Uncomplicated Firewall (UFW)"
+
+echo -e "[ i ] Configuring UFW rules..."
+cp before.rules /etc/ufw/before.rules > /dev/null
+ufw reload > /dev/null
+overwrite "${YES} UFW rules configured"
 
 echo -e "[ i ] Installing Cracklib..."
 apt-get -y install libpam-cracklib > /dev/null
