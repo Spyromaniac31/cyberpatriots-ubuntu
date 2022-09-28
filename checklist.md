@@ -3,6 +3,7 @@
 * Solve the three forensic questions. These may rely on files or programs you will eventually delete, which is why we do them first.
 ## 2. Configure Update Settings 📦
 * Open System Settings and make sure the system checks for and installs updates as much as possible, and make sure the correct software sources are enabled.
+* `sudo nano /etc/apt/sources.list` and make sure nothing besides the official Ubuntu repositories are enabled.
 ## 3. Run Script 📜
 ## 4. Manage Services ⚙️
 * List enabled services with `service --status-all`
