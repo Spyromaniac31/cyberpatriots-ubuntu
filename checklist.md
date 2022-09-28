@@ -4,12 +4,14 @@
 ## 2. Configure Update Settings 📦
 * Open System Settings and make sure the system checks for and installs updates as much as possible, and make sure the correct software sources are enabled.
 * `sudo nano /etc/apt/sources.list` and make sure nothing besides the official Ubuntu repositories are enabled.
+* `nano` is a built-in command-line text editor. Learn more [here](https://help.ubuntu.com/community/Nano)
 ## 3. Run Script 📜
+* Before you do this, make sure you set the script to executable. You can do this by running `chmod +x script.sh` in the terminal.
+* Make sure you modify the script to use the primary user's password instead of the default password `Cyb3rP@triot`, as changing the primary user's password will not be necessary and can introduce login errors.
 ## 4. Manage Services ⚙️
 * List enabled services with `service --status-all`
 * Common unwanted services are disabled by the script, but there may be other rogue services to remove
 * If SSH is required, use `sudo nano /etc/ssh/sshd_config` to examine and configure SSH access
-* `nano` is a built-in command-line text editor. Learn more [here](https://help.ubuntu.com/community/Nano)
 ## 5. Check Ports 🚤
 * List processes listening on ports with `sudo netstat -tulpn`
 ## 6. Check for Rootkits 🔒

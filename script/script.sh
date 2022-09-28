@@ -40,6 +40,7 @@ while read -r user pass uid gid desc home shell; do
 done < /etc/passwd
 overwrite "${YES} Unauthorized users removed"
 
+# UPDATE THIS PASSWORD BEFORE RUNNING THE SCRIPT
 echo -e "[ i ] Updating user passwords..."
 while read line; do
   chpasswd $line:Cyb3rP@triot &> /dev/null
