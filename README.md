@@ -1,6 +1,9 @@
 # cyberpatriots-ubuntu
+
 This repo contains a comprehensive script and checklist for use on CyberPatriots Ubuntu images.
+
 ## Get started
+
 * Download the repo on your host machine
 * Copy the contents of the `scripts` folder onto a USB drive. Everything should be in the same directory
 * Remove the USB drive
