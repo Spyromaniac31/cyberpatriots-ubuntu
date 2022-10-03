@@ -10,4 +10,5 @@ This repo contains a comprehensive script and checklist for use on CyberPatriots
 * Start the VM
 * Once booted into Ubuntu, insert the USB drive
 * In the same directory as the script files, add `users.txt` and `admins.txt` and populate the files with the lists of authorized users and administrators, respectively
+* Replace the password in the script with the default user's password
 * Follow the checklist
