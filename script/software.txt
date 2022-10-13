@@ -10,3 +10,4 @@ openssh-server
 rsync
 nginx
 squid
+gameconqueror
