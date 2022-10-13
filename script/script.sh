@@ -88,6 +88,18 @@ cp before.rules /etc/ufw/before.rules > /dev/null
 ufw reload > /dev/null
 overwrite "${YES} UFW rules configured"
 
+echo -e "[ i ] Configuring SSH..."
+cp sshd_config /etc/ssh/sshd_config > /dev/null
+cp sshd /etc/pam.d/sshd > /dev/null
+# Ensure correct permissions and owner on private keys
+chmod 600 /etc/ssh/ssh_host_*_key
+chown root:root /etc/ssh/ssh_host_*_key
+# Ensure correct permissions and owner on public keys
+chmod 644 /etc/ssh/ssh_host_*_key.pub
+chown root:root /etc/ssh/ssh_host_*_key.pub
+service ssh restart > /dev/null
+overwrite "${YES} SSH configured"
+
 echo -e "[ i ] Installing Cracklib..."
 apt-get -y install libpam-cracklib > /dev/null
 overwrite "${YES} Installed Cracklib"
