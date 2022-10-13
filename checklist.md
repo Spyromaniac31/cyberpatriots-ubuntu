@@ -14,6 +14,7 @@
 
 * Before you do this, make sure you set the script to executable. You can do this by running `chmod +x script.sh` in the terminal.
 * Make sure you modify the script to use the primary user's password instead of the default password `Cyb3rP@triot`, as changing the primary user's password will not be necessary and can introduce login errors.
+* Once the script is ready, run it with `./script.sh`. This will take a while, so be patient.
 
 ## 4. Manage Services ⚙️
 
