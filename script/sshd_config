@@ -37,8 +37,8 @@ LogLevel VERBOSE
 LoginGraceTime 60
 PermitRootLogin no
 #StrictModes yes
-MaxAuthTries 4
-MaxSessions 4
+MaxAuthTries 3
+MaxSessions 2
 
 #PubkeyAuthentication yes
 
@@ -89,7 +89,7 @@ ChallengeResponseAuthentication no
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
 
-#AllowAgentForwarding yes
+AllowAgentForwarding no
 #AllowTcpForwarding yes
 #GatewayPorts no
 X11Forwarding no
@@ -98,9 +98,9 @@ X11Forwarding no
 #PermitTTY yes
 PrintMotd no
 #PrintLastLog yes
-#TCPKeepAlive yes
+TCPKeepAlive no
 PermitUserEnvironment no
-#Compression delayed
+Compression no
 ClientAliveInterval 300
 ClientAliveCountMax 0
 #UseDNS no
