@@ -11,3 +11,6 @@ rsync
 nginx
 squid
 gameconqueror
+postfix
+hydra
+deluge
