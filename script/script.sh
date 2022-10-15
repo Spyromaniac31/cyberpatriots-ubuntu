@@ -126,7 +126,7 @@ if [[ -f "/etc/ssh/ssh_host_ed25519_key.pub" ]]; then
   chmod 644 /etc/ssh/ssh_host_ed25519_key.pub
   chown root:root /etc/ssh/ssh_host_ed25519_key.pub
 fi
-service ssh restart > /dev/null
+service ssh restart &> /dev/null
 overwrite "${YES} SSH configured"
 
 echo -e "[ i ] Installing Cracklib..."
