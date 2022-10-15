@@ -92,11 +92,40 @@ echo -e "[ i ] Configuring SSH..."
 cp sshd_config /etc/ssh/sshd_config > /dev/null
 cp sshd /etc/pam.d/sshd > /dev/null
 # Ensure correct permissions and owner on private keys
-chmod 600 /etc/ssh/ssh_host_*_key
-chown root:root /etc/ssh/ssh_host_*_key
-# Ensure correct permissions and owner on public keys
-chmod 644 /etc/ssh/ssh_host_*_key.pub
-chown root:root /etc/ssh/ssh_host_*_key.pub
+# Check if SSH keys present
+if [[ -f "/etc/ssh/ssh_host_rsa_key" ]]; then
+  chmod 600 /etc/ssh/ssh_host_rsa_key
+  chown root:root /etc/ssh/ssh_host_rsa_key
+fi
+if [[ -f "/etc/ssh/ssh_host_dsa_key" ]]; then
+  chmod 600 /etc/ssh/ssh_host_dsa_key
+  chown root:root /etc/ssh/ssh_host_dsa_key
+fi
+if [[ -f "/etc/ssh/ssh_host_ecdsa_key" ]]; then
+  chmod 600 /etc/ssh/ssh_host_ecdsa_key
+  chown root:root /etc/ssh/ssh_host_ecdsa_key
+fi
+if [[ -f "/etc/ssh/ssh_host_ed25519_key" ]]; then
+  chmod 600 /etc/ssh/ssh_host_ed25519_key
+  chown root:root /etc/ssh/ssh_host_ed25519_key
+fi
+# Check if public SSH keys present
+if [[ -f "/etc/ssh/ssh_host_rsa_key.pub" ]]; then
+  chmod 644 /etc/ssh/ssh_host_rsa_key.pub
+  chown root:root /etc/ssh/ssh_host_rsa_key.pub
+fi
+if [[ -f "/etc/ssh/ssh_host_dsa_key.pub" ]]; then
+  chmod 644 /etc/ssh/ssh_host_dsa_key.pub
+  chown root:root /etc/ssh/ssh_host_dsa_key.pub
+fi
+if [[ -f "/etc/ssh/ssh_host_ecdsa_key.pub" ]]; then
+  chmod 644 /etc/ssh/ssh_host_ecdsa_key.pub
+  chown root:root /etc/ssh/ssh_host_ecdsa_key.pub
+fi
+if [[ -f "/etc/ssh/ssh_host_ed25519_key.pub" ]]; then
+  chmod 644 /etc/ssh/ssh_host_ed25519_key.pub
+  chown root:root /etc/ssh/ssh_host_ed25519_key.pub
+fi
 service ssh restart > /dev/null
 overwrite "${YES} SSH configured"
 
