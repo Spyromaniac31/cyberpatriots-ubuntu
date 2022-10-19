@@ -43,7 +43,8 @@ overwrite "${YES} Unauthorized users removed"
 # UPDATE THIS PASSWORD BEFORE RUNNING THE SCRIPT
 echo -e "[ i ] Updating user passwords..."
 while read line; do
-  echo $line':FusRoDah!!' | chpasswd &> /dev/null
+  echo $line':Cyb3rP@triot' | chpasswd &> /dev/null
+  chage -m 7 -M 90 -W 14 &> /dev/null
 done < users.txt
 overwrite "${YES} User passwords updated"
 
