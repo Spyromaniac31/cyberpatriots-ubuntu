@@ -297,3 +297,6 @@ echo -e "[ i ] Purging old packages..."
 apt-get -y autoremove > /dev/null
 overwrite "${YES} Purged old packages"
 
+echo -e "[ i ] Updating resolver configuration file..."
+cp host.conf /etc/host.conf
+overwrite "${YES} Updated resolver configuration file"
