@@ -300,3 +300,8 @@ overwrite "${YES} Purged old packages"
 echo -e "[ i ] Updating resolver configuration file..."
 cp host.conf /etc/host.conf
 overwrite "${YES} Updated resolver configuration file"
+
+echo -e "[ i ] Securing shared memory..."
+cp fstab /etc/fstab
+mount -a
+overwrite "${YES} Secured shared memory"
