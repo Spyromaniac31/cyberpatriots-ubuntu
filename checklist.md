@@ -24,7 +24,12 @@
 
 ## 5. Check Ports 🚤
 
-* List processes listening on ports with `sudo netstat -tulpn`
+* List processes listening on ports with `sudo ss -ln`
+* ss is a newer version of netstat, which is a built-in command-line tool for examining network connections. Learn more [here](https://phoenixnap.com/kb/ss-command)
+* To see the program associated with a port, use `sudo lsof -i :<port number>`
+* Use `whereis <program name>` to find the location of the program, which can help you find which package it belongs to
+* Use `dpkg -S <program location>` to find the package that contains the program
+* If the program isn't in a package, delete it with `sudo rm <program location>`
 
 ## 6. Check for Rootkits 🔒
 
