@@ -68,6 +68,7 @@
 * `ps aef` lists all processes. You might want to scan these to see if anything weird is listed
 * `ps aux | grep netcat` returns all running processes with `netcat` in the name. Netcat is a networking utility that we don't want on the machine.
 * Note: If Netcat isn't running, the above command will still return one entry for `grep --color=auto netcat` (the process you invoke by running the command)
+* htop is a useful tool for monitoring processes. Learn more [here](https://www.tecmint.com/htop-cpu-monitoring-tool-in-linux/)
 * Learn more about `ps` [here](https://www.computernetworkingnotes.com/linux-tutorials/ps-aux-command-and-ps-command-explained.html)
 
 ## 12. Configure Firefox 🦊
