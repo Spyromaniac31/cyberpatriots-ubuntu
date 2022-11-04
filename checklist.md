@@ -57,6 +57,7 @@
 * /var/log/daemon.log
 * /var/log/kern.log
 * /var/log/dpkg.log
+* The dpkg log can be very useful to find programs installed around the same time as known malware
 
 ## 10. Remove user files
 
