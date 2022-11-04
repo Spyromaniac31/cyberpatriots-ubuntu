@@ -59,7 +59,7 @@
 * /var/log/dpkg.log
 * The dpkg log can be very useful to find programs installed around the same time as known malware
 
-## 10. Remove user files
+## 10. Remove User Files
 
 * Look in userfiles.txt for the files you want to remove.
 
@@ -74,3 +74,25 @@
 ## 12. Configure Firefox 🦊
 
 * Go through Firefox settings and make everything as secure as possible. Make sure Firefox is updated before you do this, as settings may change between versions.
+
+## 13. Check for Startup Programs 🚀
+
+* Use `sudo nano <file name>` to check the contents of the following files:
+* /etc/rc.local
+* /etc/crontab
+* ~/.config/autostart
+* /etc/xdg/autostart
+* /etc/rc0.d
+* /etc/rc1.d
+* /etc/rc2.d
+* /etc/rc3.d
+* /etc/rc4.d
+* /etc/rc5.d
+* /etc/rc6.d
+* /etc/rcS.d
+* /etc/cron.d
+* /etc/cron.daily
+* /etc/cron.hourly
+* /etc/cron.monthly
+* /etc/cron.weekly
+* /etc/init.d
