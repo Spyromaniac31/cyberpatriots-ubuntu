@@ -34,6 +34,17 @@
 ## 6. Check for Rootkits 🔒
 
 * Run Rookit Hunter with `sudo rkhunter -c`
+* The following may result in positives, but are safe to leave:
+* `/usr/bin/unhide.rb`
+* `passwd` file changes
+* Group file changes
+* `/dev/.udev/rules.d/root.rules`
+* `/dev/.udev`
+* `/etc/.java`
+* `/dev/.initramfs`
+* Rootkit Hunter will detail its findings in `/var/log/rkhunter.log`
+* If Rootkit Hunter finds anything aside from `unhide.rb`, agree to let it clean the system
+* Set Rootkit Hunter to run periodically by opening `/etc/default/rkhunter` and changing `CRON_DAILY_RUN` and `CRON_DB_UPDATE` to true
 
 ## 7. Run Lynis 📝
 
