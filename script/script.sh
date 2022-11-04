@@ -48,6 +48,10 @@ while read line; do
 done < users.txt
 overwrite "${YES} User passwords updated"
 
+echo -e "[ i ] Disabling root account..."
+passwd -l root
+overwrite "${YES} Disabled root account"
+
 echo -e "[ i ] Configuring admin privileges"
 while read -r user pass uid gid desc home shell; do
   if (($uid >= 1000)); then
