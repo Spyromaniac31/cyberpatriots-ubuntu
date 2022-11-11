@@ -12,6 +12,8 @@ netcat-traditional
 netmate
 nfs-kernel-server
 nginx
+nginx-common
+nginx-core
 nginx-full
 nginx-light
 nginx-naxsi
