@@ -84,9 +84,31 @@ echo -e "[ i ] Updating APT periodic configuration..."
 cp 10periodic /etc/apt/apt.conf.d/10periodic > /dev/null
 overwrite "${YES} Updated APT periodic configuration"
 
+echo -e "[ i ] Ensuring ufw is installed..."
+apt install -y ufw > /dev/null
+overwrite "${YES} Ensured ufw is installed"
+
+echo -e "[ i ] Ensuring iptables-persistent is not installed with ufw"
+apt purge -y iptables-persistent > /dev/null
+overwrite "${YES} Ensured iptables-persistent is not installed with ufw"
+
+echo -e "[ i ] Ensuring ufw service is enabled..."
+systemctl unmask ufw.service > /dev/null
+systemctl --now enable ufw.service > /dev/null
 ufw enable > /dev/null
 ufw logging full > /dev/null
 echo -e "${YES} Enabled Uncomplicated Firewall (UFW)"
+
+echo -e "[ i ] Ensuring ufw loopback traffic is configured..."
+ufw allow in on lo > /dev/null
+ufw allow out on lo > /dev/null
+ufw deny in from 127.0.0.0/8 > /dev/null
+ufw deny out from ::1 > /dev/null
+overwrite "${YES} Ensured ufw loopback traffic is configured"
+
+echo -e "[ i ] Ensuring ufw outbound connections are configured..."
+ufw allow out on all > /dev/null
+overwrite "${YES} Ensured ufw outbound connections are configured"
 
 echo -e "[ i ] Configuring UFW rules..."
 cp before.rules /etc/ufw/before.rules > /dev/null
@@ -185,19 +207,19 @@ echo "WARNING: UNAUTHORIZED ACCESS IS FORBIDDEN. PENAL LAWS WILL BE ENFORCED BY 
 overwrite "${YES} Added legal banners"
 
 echo -e "[ i ] Disabling DCCP protocol..."
-echo "install dccp /bin/true" > /etc/modprobe.d/dccp.conf
+echo "install dccp /bin/false" > /etc/modprobe.d/dccp.conf
 overwrite "${YES} Disabled DCCP protocol"
 
 echo -e "[ i ] Disabling SCTP protocol..."
-echo "install sctp /bin/true" > /etc/modprobe.d/sctp.conf
+echo "install sctp /bin/false" > /etc/modprobe.d/sctp.conf
 overwrite "${YES} Disabled SCTP protocol"
 
 echo -e "[ i ] Disabling RDS protocol..."
-echo "install rds /bin/true" > /etc/modprobe.d/rds.conf
+echo "install rds /bin/false" > /etc/modprobe.d/rds.conf
 overwrite "${YES} Disabled RDS protocol"
 
 echo -e "[ i ] Disabling TIPC protocol..."
-echo "install tipc /bin/true" > /etc/modprobe.d/tipc.conf
+echo "install tipc /bin/false" > /etc/modprobe.d/tipc.conf
 overwrite "${YES} Disabled TIPC protocol"
 
 echo -e "[ i ] Updating shadow password configuration file..."
@@ -301,3 +323,91 @@ echo -e "[ i ] Securing shared memory..."
 cp fstab /etc/fstab
 mount -a
 overwrite "${YES} Secured shared memory"
+
+### CIS Benchmark ###
+
+echo -e "[ i ] Ensuring Avahi Server is not installed..."
+systemctl stop avahi-daemon.service &> /dev/null
+systemctl stop avahi-daemon.socket &> /dev/null
+apt purge -y avahi-daemon &> /dev/null
+overwrite "${YES} Ensured Avahi Server is not installed"
+
+echo -e "[ i ] Ensuring CUPS is not installed..."
+apt purge -y cups &> /dev/null
+overwrite "${YES} Ensured CUPS is not installed"
+
+echo -e "[ i ] Ensuring DHCP Server is not installed..."
+apt purge -y isc-dhcp-server &> /dev/null
+overwrite "${YES} Ensured DHCP Server is not installed"
+
+echo -e "[ i ] Ensuring LDAP Server is not installed..."
+apt purge -y slapd &> /dev/null
+overwrite "${YES} Ensured LDAP Server is not installed"
+
+echo -e "[ i ] Ensuring NFS is not installed..."
+apt purge -y nfs-kernel-server &> /dev/null
+overwrite "${YES} Ensured NFS is not installed"
+
+echo -e "[ i ] Ensuring DNS Server is not installed..."
+apt purge -y bind9 &> /dev/null
+overwrite "${YES} Ensured DNS Server is not installed"
+
+echo -e "[ i ] Ensuring FTP Server is not installed..."
+apt purge -y vsftpd &> /dev/null
+overwrite "${YES} Ensured FTP Server is not installed"
+
+echo -e "[ i ] Ensuring HTTP Server is not installed..."
+apt purge -y apache2 &> /dev/null
+overwrite "${YES} Ensured HTTP Server is not installed"
+
+echo -e "[ i ] Ensuring IMAP and POP3 Server are not installed..."
+apt purge -y dovecot-imapd &> /dev/null
+apt purge -y dovecot-pop3d &> /dev/null
+overwrite "${YES} Ensured IMAP and POP3 Server are not installed"
+
+echo -e "[ i ] Ensuring Samba is not installed..."
+apt purge -y samba &> /dev/null
+overwrite "${YES} Ensured Samba is not installed"
+
+echo -e "[ i ] Ensuring HTTP Proxy Server is not installed..."
+apt purge -y squid &> /dev/null
+overwrite "${YES} Ensured HTTP Proxy Server is not installed"
+
+echo -e "[ i ] Ensuring SNMP Server is not installed..."
+apt purge -y snmpd &> /dev/null
+overwrite "${YES} Ensured SNMP Server is not installed"
+
+echo -e "[ i ] Ensuring NIS Server is not installed..."
+apt purge -y nis &> /dev/null
+overwrite "${YES} Ensured NIS Server is not installed"
+
+echo -e "[ i ] Ensuring rsync service is not installed"
+apt purge -y rsync &> /dev/null
+overwrite "${YES} Ensured rsync service is not installed"
+
+echo -e "[ i ] Ensuring NIS Client is not installed..."
+apt purge -y nis &> /dev/null
+overwrite "${YES} Ensured NIS Client is not installed"
+
+echo -e "[ i ] Ensuring rsh client is not installed..."
+apt purge -y rsh-client &> /dev/null
+apt purge -y rsh-redone-client &> /dev/null
+overwrite "${YES} Ensured rsh client is not installed"
+
+echo -e "[ i ] Ensuring talk client is not installed..."
+apt purge -y talk &> /dev/null
+apt purge -y ntalk &> /dev/null
+overwrite "${YES} Ensured talk client is not installed"
+
+echo -e "[ i ] Ensuring telnet client is not installed..."
+apt purge -y telnet &> /dev/null
+overwrite "${YES} Ensured telnet client is not installed"
+
+echo -e "[ i ] Ensuring LDAP client is not installed..."
+apt purge -y ldap-utils &> /dev/null
+overwrite "${YES} Ensured LDAP client is not installed"
+
+echo -e "[ i ] Ensuring RPC is not installed..."
+apt purge -y rpcbind &> /dev/null
+overwrite "${YES} Ensured RPC is not installed"
+

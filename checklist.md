@@ -24,12 +24,9 @@
 
 ## 5. Check Ports 🚤
 
-* List processes listening on ports with `sudo ss -ln`
-* ss is a newer version of netstat, which is a built-in command-line tool for examining network connections. Learn more [here](https://phoenixnap.com/kb/ss-command)
-* To see the program associated with a port, use `sudo lsof -i :<port number>`
-* Use `whereis <program name>` to find the location of the program, which can help you find which package it belongs to
-* Use `dpkg -S <program location>` to find the package that contains the program
-* If the program isn't in a package, delete it with `sudo rm <program location>`
+* Run `sudo lsof -i -P -n | grep -v "(ESTABLISHED)"` to list all services listening on ports
+* Run `sudo apt purge <package_name>` to remove any unwanted services
+* If you can't remove the package for dependency reasons, you can stop and mask the service with `sudo systemctl --now mask <service_name>`
 
 ## 6. Check for Rootkits 🔒
 
@@ -113,3 +110,11 @@
 * /etc/cron.monthly
 * /etc/cron.weekly
 * /etc/init.d
+
+## 14. Ensure postfix is configured for local use only 📬
+
+* Postfix should be removed, but I think Lynis installs it by default, so if you're able to install Lynis, you'll need to configure postfix to only send mail locally.
+* `sudo nano /etc/postfix/main.cf`
+* Add or modify the following line in the `RECEIVING MAIL` section:
+* `inet_interfaces = loopback-only`
+* Restart postfix with `sudo systemctl restart postfix`
