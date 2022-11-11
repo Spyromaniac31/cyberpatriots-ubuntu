@@ -49,7 +49,13 @@
 ## 7. Run Lynis 📝
 
 * Lynis gives an incredibly comprehensive system audit report
-* Run `sudo lynis audit system`
+* You won't be able to do this on APS Wi-Fi because it blocks cisofy.com for some reason
+* `wget -q -O - https://packages.cisofy.com/keys/cisofy-software-public.key | sudo apt-key add -`
+* `echo "deb https://packages.cisofy.com/community/lynis/deb/ stable main" | sudo tee /etc/apt/sources.list.d/cisofy-lynis.list`
+* `sudo apt install apt-transport-https`
+* `sudo apt update`
+* `sudo apt install lynis`
+* Run `sudo lynis audit system` to begin the report
 
 ## 8. Check Password Files 🔑
 

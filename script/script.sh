@@ -138,14 +138,6 @@ echo -e "[ i ] Installing Cracklib..."
 apt-get -y install libpam-cracklib > /dev/null
 overwrite "${YES} Installed Cracklib"
 
-echo -e "[ i ] Installing Lynis..."
-wget -q -O - https://packages.cisofy.com/keys/cisofy-software-public.key | sudo apt-key add - &> /dev/null
-echo "deb https://packages.cisofy.com/community/lynis/deb/ stable main" | sudo tee /etc/apt/sources.list.d/cisofy-lynis.list > /dev/null
-apt-get -y install apt-transport-https > /dev/null
-apt-get update > /dev/null
-apt-get -y install lynis > /dev/null
-overwrite "${YES} Installed Lynis"
-
 echo -e "[ i ] Installing Rootkit Hunter..."
 DEBIAN_FRONTEND=noninteractive apt-get install -y postfix > /dev/null
 systemctl stop postfix
