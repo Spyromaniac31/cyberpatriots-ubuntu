@@ -113,3 +113,10 @@
 * /etc/cron.monthly
 * /etc/cron.weekly
 * /etc/init.d
+
+## 14. Configure File History and Trash 🗑️
+
+* Open Settings > Privacy > File History & Trash and do the following:
+* Disable File History
+* Enable Automatically Delete Trash
+* Enable Automatically Delete Temporary Files
